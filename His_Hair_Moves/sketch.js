@@ -111,11 +111,12 @@ function nostril(x, y) {
 
 // Make face sing by using the vol variable and map function
 function mouth() {
+  var adjustedVol = map(vol, 0, 1, 0, 500);
   noStroke();
   fill(242, 159, 159);
-  ellipse(249, 325, 40, 10);
+  ellipse(249, 325, 40 + adjustedVol, 10 + adjustedVol);
   fill(0);
-  ellipse(249, 325, 30, 5);
+  ellipse(249, 325, 30 + adjustedVol, 5 + adjustedVol);
 }
 
 function bowtie() {
@@ -132,8 +133,9 @@ function eyebrows() {
 }
 
 function eyebrow(x, y) {
+  var adjustedVol = map(vol, 0, 1, 0, 500);
   stroke(0);
-  strokeWeight(2);
+  strokeWeight(2+adjustedVol);
   fill(255, 255, 255);
   line(x, y, x + 37, y);
 }

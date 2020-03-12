@@ -10,7 +10,7 @@ function setup() {
   //print(width);
   //print(height);
 }
-//this block of code is in charge of moving the ball, ass well as it's color
+//this block of code is in charge of moving the ball, as well as it's color
 function draw() {
   background(220);
   fill(255, 0, 0);
@@ -19,13 +19,15 @@ function draw() {
       x = x + 3;
       if (x >= width - dia / 2) x = width - dia / 2;
     } else if (keyCode == LEFT_ARROW) {
-      x = x - 3
+      x -= 3
+      if (x <= dia / 2) x = dia / 2;
     } else if (keyCode == DOWN_ARROW) {
       y = y + 3;
       if (y >= height - dia / 2) y = height - dia / 2;
     } else {
       (keyCode == UP_ARROW)
       y = y - 3;
+      if (y <= dia / 2) y = dia / 2;
     }
   }
   ellipse(x, y, dia, dia);

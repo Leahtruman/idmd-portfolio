@@ -1,28 +1,36 @@
-//setting up pyr as a variable to be able to use it as shorthand to load our images later
-var pyr;
-
-//preload sets up external files. this happens before setup
+var ima = []; // array for sleep1 and sleep2 images
+var imb = []; // array for all oher images
+// aspect ratio for all images
+var apectRatio = 1280 / 1280;
 function preload() {
-  sl1 = loadImage("sleep1.jpg");
-  a1 = 1280 / 1280;
-  sl2 = loadImage("sleep2.jpg");
-  a2 = 1280 / 1280;
+  ima[0] = loadImage("sleep1.jpg");
+  ima[1] = loadImage("sleep2.jpg");
+  for (i = 0; i < 16; i++) {
+    imageName = "im" + (i + 1) + ".jpg"; // generates images from im1.jpg-im16.jpg
+    //print(imageName);
+    imb[i] = loadImage(imageName);      // put the image into the imb array
+  }
 }
-//setting up the canvas
 function setup() {
   createCanvas(600, 600);
+  frameRate(4);
 }
-//the variable "disp" is used to determine which images appear based on it's value
 var disp = 1;
-
+var i2d = 0;             // Global variable for tracking image# to display
 function draw() {
-  disp *= -1;
+  disp = disp * -1;
   background(220);
-  //print(disp);
-  frameRate(3);
-  if (disp > 0) {
-    image(sl1, 0, 0, width, height);
+  //print(i2d);
+  if (disp > 0) {        // Show sleep1 and 2
+    image(ima[0], 0, 0, width, height / apectRatio);
   } else {
-    image(sl2, 0, 0, width, height);
+    image(ima[1], 0, 0, width, height / apectRatio);
+  }
+  if (mouseIsPressed) {  // Start displaying hitting-the-alarm sequence of images
+    i2d += 1;            // Using global variable to set the image
+    if (i2d > 15) {      // Setup to repeatedly show 16 images in sequence
+      i2d = 0;
+    }
+    image(imb[i2d], 0, 0, width, height / apectRatio);
   }
 }
